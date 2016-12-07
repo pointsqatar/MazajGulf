@@ -1,0 +1,18 @@
+body { min-width: 980px;}
+.class { behavior:url(js/PIE.htc); position:absolute;}
+
+.text-3 { 
+	filter: progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand',
+        M11=0, M12=1,
+        M21=-1, M22=0);
+}
+.banner-1 .text-3 { margin-top: 16px; margin-left: 15px; margin-right: -20px;}
+
+.various:hover img {filter:progid:DXImageTransform.Microsoft.Alpha(opacity=40);}
+
+.magnifier:hover img {filter:progid:DXImageTransform.Microsoft.Alpha(opacity=40);}
+
+.camera_prev:hover,
+.camera_next:hover {filter:progid:DXImageTransform.Microsoft.Alpha(opacity=60);}
+
+#toTop:hover { filter:progid:DXImageTransform.Microsoft.Alpha(opacity=70);}

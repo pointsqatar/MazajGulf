@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "AboutUs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    var aboutContent = '<img src="/images/page-4_img-1.jpg" alt="" class="img-ind w1">  <div> '+ 
+        '<p>Aenean nommy hendrerit mauris. Phasellus porta. Fusce suscipit varius mi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla dui. Fusce feugiat malesuada odio. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem. Maecs tristique orci ac sem. Duis ultricies pharetra magna. </p>'+
+        '<p>Donec accumsan malesuada orci. Donec sit amet eros. Lorem ipsum dolor sit amet, coetuer adipiscing elit. Mauris fermentum dictum magna. Sed laoreet aliquam leo. Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit.</p>'+
+        '<div>Aenean auctor wisi et urna. Aliquam erat volutpat.</div></div>';
+
+    var whatContent = '<img src="/images/page-4_img-2.jpg" alt="" class="img-ind w1">  <div> ' +
+       '<p>Aenean nommy hendrerit mauris. Phasellus porta. Fusce suscipit varius mi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla dui. Fusce feugiat malesuada odio. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem. Maecs tristique orci ac sem. Duis ultricies pharetra magna. </p>' +
+       '<p>Donec accumsan malesuada orci. Donec sit amet eros. Lorem ipsum dolor sit amet, coetuer adipiscing elit. Mauris fermentum dictum magna. Sed laoreet aliquam leo. Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit.</p>' +
+       '<div>Aenean auctor wisi et urna. Aliquam erat volutpat.</div></div>';
+
+    var whoContent = '<img src="/images/page-4_img-1.jpg" alt="" class="img-ind w1">  <div> ' +
+       '<p>Aenean nommy hendrerit mauris. Phasellus porta. Fusce suscipit varius mi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla dui. Fusce feugiat malesuada odio. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem. Maecs tristique orci ac sem. Duis ultricies pharetra magna. </p>' +
+       '<p>Donec accumsan malesuada orci. Donec sit amet eros. Lorem ipsum dolor sit amet, coetuer adipiscing elit. Mauris fermentum dictum magna. Sed laoreet aliquam leo. Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit.</p>' +
+       '<div>Aenean auctor wisi et urna. Aliquam erat volutpat.</div></div>';
+    $(document).ready(function () {
+        
+        $("#about").on("click", function () {
+            $("#about_content").html(aboutContent);
+            $("#heading").text("About our company");
+        });
+
+        $("#what").on("click", function () {
+            $("#about_content").html(whatContent);
+            $("#heading").text("What we do?");
+        });
+
+        $("#team").on("click", function () {
+            $("#about_content").html(whoContent);
+            $("#heading").text("Who we are?");
+        });
+   
+    });
+</script>
+
+<section class="content">
+    <div class="bg-1">
+        <div class="container_12">
+            <div class="row">
+                <div class="grid_9">
+                    <h2>About Us</h2>
+                    <div class="post">
+                        <div class="post_info clearfix">
+                            <div class="date img-ind">@DateTime.Now.ToString("dd MMM yyyy")</div>
+                            <div class="extra-wrap">
+                                <div class="blog-title"><a id="heading" class="color-4">About our company</a></div>
+                            </div>
+                        </div>
+                        <div class="clearfix" id="about_content">
+                            <img src="~/images/page-4_img-1.jpg" alt="" class="img-ind w1">
+                            <div>
+                                <p>Aenean nommy hendrerit mauris. Phasellus porta. Fusce suscipit varius mi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla dui. Fusce feugiat malesuada odio. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem. Maecs tristique orci ac sem. Duis ultricies pharetra magna. </p>
+                                <p>Donec accumsan malesuada orci. Donec sit amet eros. Lorem ipsum dolor sit amet, coetuer adipiscing elit. Mauris fermentum dictum magna. Sed laoreet aliquam leo. Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit.</p>
+                                <div>Aenean auctor wisi et urna. Aliquam erat volutpat.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="grid_3">
+                    <h2>Categories</h2>
+                    <ul class="list">
+                        <li><a href="#" id="about">About Us</a></li>
+                        <li><a href="#" id="what">What we do</a></li>
+                        <li><a href="#" id="team">Our Team</a></li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
