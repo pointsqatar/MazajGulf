@@ -43,12 +43,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -111,6 +121,16 @@
     <Content Include="css\style.css" />
     <Content Include="css\superfish.css" />
     <Content Include="css\touchTouch.css" />
+    <Content Include="DataAccessLayer\MazajGulfModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MazajGulfModel.Context.cs</LastGenOutput>
+      <DependentUpon>MazajGulfModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="DataAccessLayer\MazajGulfModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MazajGulfModel.edmx</DependentUpon>
+      <LastGenOutput>MazajGulfModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Global.asax" />
     <Content Include="images\arrow-1.gif" />
     <Content Include="images\arrows-1.gif" />
@@ -155,12 +175,12 @@
     <Content Include="images\logo.jpg" />
     <Content Include="images\logo.png" />
     <Content Include="images\magnifier.png" />
-    <Content Include="images\page-1_img-1.jpg" />
-    <Content Include="images\page-1_img-2.jpg" />
-    <Content Include="images\page-1_img-3.jpg" />
-    <Content Include="images\page-1_img-4.jpg" />
-    <Content Include="images\page-1_img-5.jpg" />
-    <Content Include="images\page-1_img-6.jpg" />
+    <Content Include="images\HomeLatestVideos\page-1_img-1.jpg" />
+    <Content Include="images\HomeLatestVideos\page-1_img-2.jpg" />
+    <Content Include="images\HomeLatestVideos\page-1_img-3.jpg" />
+    <Content Include="images\HomeLatestVideos\page-1_img-4.jpg" />
+    <Content Include="images\HomeLatestVideos\page-1_img-5.jpg" />
+    <Content Include="images\HomeLatestVideos\page-1_img-6.jpg" />
     <Content Include="images\page-1_img-7.jpg" />
     <Content Include="images\page-1_img-8.jpg" />
     <Content Include="images\page-1_img-9.jpg" />
@@ -192,7 +212,7 @@
     <Content Include="images\page-4_img-1.jpg" />
     <Content Include="images\page-4_img-2.jpg" />
     <Content Include="images\preloader.gif" />
-    <Content Include="images\slide-1.jpg" />
+    <Content Include="images\HomeCarousel\slide-1.jpg" />
     <Content Include="images\slide-2.jpg" />
     <Content Include="images\slide-3.jpg" />
     <Content Include="images\slide-4.jpg" />
@@ -222,6 +242,30 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DataAccessLayer\HomeCarousel.cs">
+      <DependentUpon>MazajGulfModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccessLayer\LatestVideo.cs">
+      <DependentUpon>MazajGulfModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccessLayer\MazajGulfModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MazajGulfModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccessLayer\MazajGulfModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MazajGulfModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccessLayer\MazajGulfModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MazajGulfModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccessLayer\WatchTonight.cs">
+      <DependentUpon>MazajGulfModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -232,6 +276,13 @@
     <Content Include="packages.config" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <EntityDeploy Include="DataAccessLayer\MazajGulfModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MazajGulfModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="DataAccessLayer\MazajGulfModel.edmx.diagram">
+      <DependentUpon>MazajGulfModel.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\mazajgulf.com - Web Deploy.pubxml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
@@ -245,6 +296,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

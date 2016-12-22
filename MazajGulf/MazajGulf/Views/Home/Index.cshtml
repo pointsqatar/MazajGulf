@@ -1,8 +1,13 @@
-﻿
+﻿@using MazajGulf.DataAccessLayer
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    MazajGulfEntities dbContext = new MazajGulfEntities();
+    var homeCarousel = dbContext.HomeCarousels.Select(x => x);
+    var watchTonight = dbContext.WatchTonights.Select(x => x).Take(8);
+    var latestVideo = dbContext.LatestVideos.Select(x => x);
 }
+
 <div class="container_12">
     <div class="row">
         <div class="grid_9 prefix_3">
@@ -24,42 +29,18 @@
             <div class="grid_9">
                 <div class="slider">
                     <div class="camera_wrap camera_azure_skin" id="camera_wrap_1">
-                        <div data-src="../images/slide-1.jpg">
-                            <div class="camera_caption fadeIn">
-                                <div class="slider-text">
-                                    <div class="s-test-1"><span class="color-1">Reality show</span> <a href="#">‘Jungle walk’</a></div>
-                                    <div><a href="#" class="h-underline s-text-2">Praesent vestibulum aenean nonummy hendrerit mauris. Cum sociis natoque penatibus et magnis dis parturient montes ascetur ridiculus mus. Nulla dui. </a></div>
+                        @foreach (var item in homeCarousel)
+                        {
+                            <div data-src="@item.ShowImageUrl">
+                                <div class="camera_caption fadeIn">
+                                    <div class="slider-text">
+                                        <div class="s-test-1"><span class="color-1">@item.ShowHeading</span></div>
+                                        <div><a href="" class="h-underline s-text-2">@item.ShowDesc </a></div>
+                                    </div>
+                                    <div class="time">@item.ShowTiming</div>
                                 </div>
-                                <div class="time">12:20 pm</div>
                             </div>
-                        </div>
-                        <div data-src="../images/slide-2.jpg">
-                            <div class="camera_caption fadeIn">
-                                <div class="slider-text">
-                                    <div class="s-test-1"><span class="color-1">Reality show</span> <a href="#">‘Ideal Couple’</a></div>
-                                    <div><a href="#" class="h-underline s-text-2">Praesent vestibulum aenean nonummy hendrerit mauris. Cum sociis natoque penatibus et magnis dis parturient montes ascetur ridiculus mus. Nulla dui. </a></div>
-                                </div>
-                                <div class="time">12:20 pm</div>
-                            </div>
-                        </div>
-                        <div data-src="../images/slide-3.jpg">
-                            <div class="camera_caption fadeIn">
-                                <div class="slider-text">
-                                    <div class="s-test-1"><span class="color-1">For children</span> <a href="#">‘Little friends’</a></div>
-                                    <div><a href="#" class="h-underline s-text-2">Praesent vestibulum aenean nonummy hendrerit mauris. Cum sociis natoque penatibus et magnis dis parturient montes ascetur ridiculus mus. Nulla dui. </a></div>
-                                </div>
-                                <div class="time">12:20 pm</div>
-                            </div>
-                        </div>
-                        <div data-src="../images/slide-4.jpg">
-                            <div class="camera_caption fadeIn">
-                                <div class="slider-text">
-                                    <div class="s-test-1"><span class="color-1">Adult show </span><a href="#">‘Hot pepper’</a></div>
-                                    <div><a href="#" class="h-underline s-text-2">Praesent vestibulum aenean nonummy hendrerit mauris. Cum sociis natoque penatibus et magnis dis parturient montes ascetur ridiculus mus. Nulla dui. </a></div>
-                                </div>
-                                <div class="time">12:20 pm</div>
-                            </div>
-                        </div>
+                        }
                     </div>
                 </div>
             </div>
@@ -71,45 +52,27 @@
     <div class="bg-1">
         <div class="container_12">
             <div class="row">
-                <div class="grid_3">
+                    <div class="grid_3">
                     <h2>Watch tonight: </h2>
                     <div class="list_carousel responsive">
                         <ul id="foo" class="clearfix">
                             <li>
-                                <a href="#" class="clearfix">
-                                    <span class="time-2">19:00</span>
-                                    <div><span>Praesent vestibulum aenean nonummy</span></div>
-                                </a>
-                                <a href="#" class="clearfix">
-                                    <span class="time-2">20:10</span>
-                                    <div><span>Hendrerit mauris cum sociis natoque </span></div>
-                                </a>
-                                <a href="#" class="clearfix">
-                                    <span class="time-2">20:50</span>
-                                    <div><span>Praesent vestibulum aenean nonummy</span></div>
-                                </a>
-                                <a href="#" class="clearfix">
-                                    <span class="time-2">21:00</span>
-                                    <div><span>Cum sociis natoque penatibus et magnis</span></div>
-                                </a>
+                                @foreach (var item in watchTonight.Take(4))
+                                {
+                                    <a href="#" class="clearfix">
+                                        <span class="time-2">@item.ShowTiming</span>
+                                        <div><span>@item.ShowTitle</span></div>
+                                    </a>
+                                }
                             </li>
                             <li>
-                                <a href="#" class="clearfix">
-                                    <span class="time-2">19:00</span>
-                                    <div><span>Praesent vestibulum aenean nonummy</span></div>
-                                </a>
-                                <a href="#" class="clearfix">
-                                    <span class="time-2">20:10</span>
-                                    <div><span>Hendrerit mauris cum sociis natoque </span></div>
-                                </a>
-                                <a href="#" class="clearfix">
-                                    <span class="time-2">20:50</span>
-                                    <div><span>Praesent vestibulum aenean nonummy</span></div>
-                                </a>
-                                <a href="#" class="clearfix">
-                                    <span class="time-2">21:00</span>
-                                    <div><span>Cum sociis natoque penatibus et magnis</span></div>
-                                </a>
+                                @foreach (var item in watchTonight.OrderBy(x=>x.Id).Skip(4).Take(4))
+                                {
+                                    <a href="#" class="clearfix">
+                                        <span class="time-2">@item.ShowTiming</span>
+                                        <div><span>@item.ShowTitle</span></div>
+                                    </a>
+                                }
                             </li>
                         </ul>
                         <div class="arrows clearfix">
@@ -122,68 +85,59 @@
                     <div class="list_carousel responsive grid_inside">
                         <ul id="foo1" class="clearfix">
                             <li>
-                                <div class="box-1 clearfix">
-                                    <a class="various iframe" href="http://www.youtube.com/embed/2kodXWejuy0?rel=0"><img src="~/images/page-1_img-1.jpg" alt=""></a>
-                                    <div>
-                                        <a href="#">Praesent vestibulum aenean nonummy</a>
-                                        <div class="color-2">Nov.25, 2013</div>
+                                @foreach (var item in latestVideo.Take(2))
+                                {
+                                    <div class="box-1 clearfix">
+                                        <a class="various iframe" href="@item.VideoUrl">
+                                        <img src="@item.ThumbnailImage" alt=""></a>
+                                        <div>
+                                            <a>@item.VideoDescription</a>
+                                            <div class="color-2">@item.ReleaseData</div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="box-1 clearfix">
-                                    <a class="various iframe" href="http://www.youtube.com/embed/2kodXWejuy0?rel=0"><img src="~/images/page-1_img-2.jpg" alt=""></a>
-                                    <div>
-                                        <a href="#">Praesent vestibulum aenean nonummy</a>
-                                        <div class="color-2">Nov.25, 2013</div>
-                                    </div>
-                                </div>
+                                }
                             </li>
                             <li>
-                                <div class="box-1 clearfix">
-                                    <a class="various iframe" href="http://www.youtube.com/embed/2kodXWejuy0?rel=0"><img src="~/images/page-1_img-3.jpg" alt=""></a>
-                                    <div>
-                                        <a href="#">Praesent vestibulum aenean nonummy</a>
-                                        <div class="color-2">Nov.25, 2013</div>
+                                @foreach (var item in latestVideo.OrderBy(x=>x.Id).Skip(2).Take(2))
+                                {
+                                    <div class="box-1 clearfix">
+                                        <a class="various iframe" href="@item.VideoUrl">
+                                            <img src="@item.ThumbnailImage" alt="">
+                                        </a>
+                                        <div>
+                                            <a>@item.VideoDescription</a>
+                                            <div class="color-2">@item.ReleaseData</div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="box-1 clearfix">
-                                    <a class="various iframe" href="http://www.youtube.com/embed/2kodXWejuy0?rel=0"><img src="~/images/page-1_img-4.jpg" alt=""></a>
-                                    <div>
-                                        <a href="#">Praesent vestibulum aenean nonummy</a>
-                                        <div class="color-2">Nov.25, 2013</div>
-                                    </div>
-                                </div>
+                                }
                             </li>
                             <li>
-                                <div class="box-1 clearfix">
-                                    <a class="various iframe" href="http://www.youtube.com/embed/2kodXWejuy0?rel=0"><img src="~/images/page-1_img-5.jpg" alt=""></a>
-                                    <div>
-                                        <a href="#">Praesent vestibulum aenean nonummy</a>
-                                        <div class="color-2">Nov.25, 2013</div>
+                                @foreach (var item in latestVideo.OrderBy(x => x.Id).Skip(4).Take(2))
+                                {
+                                    <div class="box-1 clearfix">
+                                        <a class="various iframe" href="@item.VideoUrl">
+                                            <img src="@item.ThumbnailImage" alt="">
+                                        </a>
+                                        <div>
+                                            <a>@item.VideoDescription</a>
+                                            <div class="color-2">@item.ReleaseData</div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="box-1 clearfix">
-                                    <a class="various iframe" href="http://www.youtube.com/embed/2kodXWejuy0?rel=0"><img src="~/images/page-1_img-6.jpg" alt=""></a>
-                                    <div>
-                                        <a href="#">Praesent vestibulum aenean nonummy</a>
-                                        <div class="color-2">Nov.25, 2013</div>
-                                    </div>
-                                </div>
+                                }
                             </li>
                             <li>
-                                <div class="box-1 clearfix">
-                                    <a class="various iframe" href="http://www.youtube.com/embed/2kodXWejuy0?rel=0"><img src="~/images/page-1_img-3.jpg" alt=""></a>
-                                    <div>
-                                        <a href="#">Praesent vestibulum aenean nonummy</a>
-                                        <div class="color-2">Nov.25, 2013</div>
+                                @foreach (var item in latestVideo.OrderBy(x => x.Id).Skip(6).Take(2))
+                                {
+                                    <div class="box-1 clearfix">
+                                        <a class="various iframe" href="@item.VideoUrl">
+                                            <img src="@item.ThumbnailImage" alt="">
+                                        </a>
+                                        <div>
+                                            <a>@item.VideoDescription</a>
+                                            <div class="color-2">@item.ReleaseData</div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="box-1 clearfix">
-                                    <a class="various iframe" href="http://www.youtube.com/embed/2kodXWejuy0?rel=0"><img src="~/images/page-1_img-6.jpg" alt=""></a>
-                                    <div>
-                                        <a href="#">Praesent vestibulum aenean nonummy</a>
-                                        <div class="color-2">Nov.25, 2013</div>
-                                    </div>
-                                </div>
+                                }
                             </li>
                         </ul>
                         <div class="arrows clearfix">
