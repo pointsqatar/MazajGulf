@@ -42,9 +42,9 @@
     <script>
         $(window).load(function() {
             jQuery('#camera_wrap_1').camera({
-                height: '64.71%',
+                height: '71.71%',
                 playPause: false,
-                time: 8000,
+                time: 3000,
                 transPeriod: 1000,
                 fx: 'simpleFade',
                 loader: 'none',
@@ -145,13 +145,14 @@
                         </nav>
                         <div class="inside clearfix">
                             <ul class="list-2">
-                                <li><a href="#">login</a></li>
-                                <li><a href="#">register</a></li>
+                                <li><a href="@Url.Action("index","home")">login</a></li>
                             </ul>
                             <form id="search1" class="search" action="search.php" method="GET">
                                 <div>
-                                    <input type="text" name="s" value="Enter keyword" onClick="if(this.value=='Enter keyword'){this.value=''}" onBlur="if(this.value==''){this.value='Enter keyword'}">
-                                    <a onClick="document.getElementById('search1').submit()" class="button1">search</a>
+                                    @*<input type="text" name="s" value="Enter keyword" onClick="if(this.value=='Enter keyword'){this.value=''}" onBlur="if(this.value==''){this.value='Enter keyword'}">*@
+                                    @*<a onClick="document.getElementById('search1').submit()" class="button1">search</a>*@
+                                    <h4>Frequency : 12399 V</h4>
+                                    <h4>27500  Nile Sat</h4>
                                 </div>
                             </form>
                         </div>
@@ -201,7 +202,6 @@
                         <li><a href="#">Television</a></li>
                         <li><a href="#">Movies</a></li>
                         <li><a href="#">Radio</a></li>
-                        <li><a href="#">Adult (18+)</a></li>
                     </ul>
                 </div>
                 <div class="grid_4 fleft">

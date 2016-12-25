@@ -39,3 +39,7 @@ D:\Projects\MazajGulf\MazajGulf\MazajGulf\bin\System.Web.Http.WebHost.xml
 D:\Projects\MazajGulf\MazajGulf\MazajGulf\obj\Release\MazajGulf.dll
 D:\Projects\MazajGulf\MazajGulf\MazajGulf\obj\Release\MazajGulf.pdb
 D:\Projects\MazajGulf\MazajGulf\MazajGulf\obj\Release\MazajGulf.csprojResolveAssemblyReference.cache
+D:\Projects\MazajGulf\MazajGulf\MazajGulf\bin\EntityFramework.dll
+D:\Projects\MazajGulf\MazajGulf\MazajGulf\bin\EntityFramework.SqlServer.dll
+D:\Projects\MazajGulf\MazajGulf\MazajGulf\bin\EntityFramework.xml
+D:\Projects\MazajGulf\MazajGulf\MazajGulf\bin\EntityFramework.SqlServer.xml

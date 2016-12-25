@@ -3,42 +3,212 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
     MazajGulfEntities dbContext = new MazajGulfEntities();
-    var homeCarousel = dbContext.HomeCarousels.Select(x => x);
+    var shows = dbContext.Shows.Select(x => x);
     var watchTonight = dbContext.WatchTonights.Select(x => x).Take(8);
     var latestVideo = dbContext.LatestVideos.Select(x => x);
 }
+<script type="text/javascript">
+    var channelId = 'UCNye-wNBqNL5ZzHSJj3l8Bg';
+    var apikey = 'AIzaSyDYUqVvtDn_g1bSejqMNtSnk6Y66g0uYrw';
+
+    var baseurl = location.protocol + "//" + location.hostname + (location.port && ":" + location.port) + "/";
+    $(document).ready(function () {
+        $("#shows,#news,#horoscope,#happentoday,#lifestyle,#fashion,#sports,#weather").click(function () {
+            var value = this.id;
+
+            //$(this).css("color", "#0c2a39");
+            //$(this).css("background", "#ffb70b");
+            switch (this.id) {
+                case "shows":
+                    {
+                        var showsApi = 'api/home/shows';
+                        constructSlider(showsApi);
+                        break;
+                    }
+                case "news":
+                    {
+                        var newsApi = 'api/home/news';
+                        constructSlider(newsApi);
+                        break;
+                    }
+                case "horoscope":
+                    {
+                        var horoscopeApi = 'api/home/horoscope';
+                        constructSlider(horoscopeApi);
+                        break;
+                    }
+                case "happentoday":
+                    {
+                        var happentodayApi = 'api/home/happentoday';
+                        constructSlider(happentodayApi);
+                        break;
+                    }
+                case "lifestyle":
+                    {
+                        var lifestyleApi = 'api/home/lifestyle';
+                        constructSlider(lifestyleApi);
+                        break;
+                    }
+                case "fashion":
+                    {
+                        var fashionApi = 'api/home/fashion';
+                        constructSlider(fashionApi);
+                        break;
+                    }
+                case "sports":
+                    {
+                        var sportsApi = 'api/home/sports';
+                        constructSlider(sportsApi);
+                        break;
+                    }
+                case "weather":
+                    {
+                        var weatherApi = 'api/home/weather';
+                        constructSlider(weatherApi);
+                        break;
+                    }
+            }
+        });
+
+        //youtube
+
+        $.ajax({
+            type: 'GET',
+            url: 'https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=' + channelId + '&key=' + apikey,
+            processData: true,
+            async: false,
+            success: function (result) {
+                if (result != null) {
+                    var playListId = new Array();
+                    for (var i = 0; i < 4; i++) {
+                        playListId[i] = result.items[i].id;
+                    }
+                    getVideos(playListId);
+                }
+            },
+            error: function (result) {
+
+            }
+        });
+    });
+
+    function constructSlider(api) {
+        var slider = "";
+        $.ajax({
+            type: 'GET',
+            url: baseurl + api,
+            async: false,
+            success: function (result) {
+                if (result != null) {
+                    $.each(result, function (index, value) {
+                        //slider += '<div data-src="' + value.ShowImageUrl + '">' +
+                        //'<div class="camera_caption fadeIn">' +
+                        //'<div class="slider-text">' +
+                        //'<div class="s-test-1"><span class="color-1">' + value.ShowHeading + '</span></div>' +
+                        //'<div><a href="" class="h-underline s-text-2">' + value.ShowDesc + '</a></div>' +
+                        //'</div><div class="time">' + value.ShowTiming + '</div></div></div>';
+
+                        slider += '<div data-src="' + value.ShowImageUrl + '"></div>';
+
+                    });
+                    if (slider != null) {
+                        $("#camera_wrap_1").html(slider);
+                        ResetSlider();
+                    }
+                }
+            },
+            error: function (result) {
+
+            }
+        });
+    }
+
+    function ResetSlider() {
+        $('#camera_wrap_1').camera({
+            height: '71.71%',
+            playPause: false,
+            time: 3000,
+            transPeriod: 1000,
+            fx: 'simpleFade',
+            loader: 'none',
+            minHeight: '150px',
+            navigation: true,
+            pagination: false,
+        });
+    }
+
+    function getVideos(playListId) {
+        var youtubeData = '';
+
+        for (var i = 0; i < playListId.length; i++) {
+            youtubeData += "<li>";
+            $.ajax({
+                type: 'GET',
+                url: 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=' + playListId[i] + '&key=' + apikey,
+                processData: true,
+                async: false,
+                success: function (result) {
+                    if (result != null) {
+
+                        for (var i = 0; i < 2 ; i++) {
+                            var videoId = result.items[i].snippet.resourceId.videoId;
+                            var thumbnailImgUrl = result.items[i].snippet.thumbnails.default.url;
+                            var title = result.items[i].snippet.title;
+                            var publishDate = Date(result.items[i].snippet.publishedAt).split(' ')[1] + ' ' + Date(result.items[i].snippet.publishedAt).split(' ')[2] + ' ' + Date(result.items[i].snippet.publishedAt).split(' ')[3];
+
+                            youtubeData += '<div class="box-1 clearfix">' +
+                                            '<a class="various iframe" href="http://www.youtube.com/embed/' + videoId + '?rel=0">' +
+                                            '<img src="' + thumbnailImgUrl + '" alt="">' +
+                                            '</a><div>' +
+                                            '<a>' + title + '</a>' +
+                                            '<div class="color-2">' + publishDate + '</div>' +
+                                            '</div></div>';
+                        }
+                    }
+                },
+                error: function (result) {
+
+                }
+            });
+            youtubeData += "</li>";
+        }
+
+        $("#foo1").html(youtubeData);
+    }
+
+</script>
 
 <div class="container_12">
     <div class="row">
         <div class="grid_9 prefix_3">
-            <div class="title-1">Your favourite movies and shows:</div>
+            <div class="title-1">Your favourite shows:</div>
         </div>
         <div class="clearfix">
             <div class="grid_3">
                 <ul class="list-3 clearfix">
-                    <li><a href="#"><span class="icon-1"></span><span>Shows</span></a></li>
-                    <li><a href="#"><span class="icon-2"></span><span>news</span></a></li>
-                    <li><a href="#"><span class="icon-3"></span><span>movies</span></a></li>
-                    <li><a href="#"><span class="icon-4"></span><span>music</span></a></li>
-                    <li><a href="#"><span class="icon-5"></span><span>for children</span></a></li>
-                    <li><a href="#"><span class="icon-6"></span><span>weather</span></a></li>
-                    <li><a href="#"><span class="icon-7"></span><span>sports</span></a></li>
-                    <li><a href="#"><span class="icon-8"></span><span>LIFESTYLE</span></a></li>
+                    <li id="shows"><a><span class="icon-1"></span><span>Shows</span></a></li>
+                    <li id="news"><a><span class="icon-2"></span><span>news</span></a></li>
+                    <li id="horoscope"><a><span class="icon-3"></span><span>Horoscope</span></a></li>
+                    <li id="happentoday"><a><span class="icon-4"></span><span>Happen Today</span></a></li>
+                    <li id="lifestyle"><a><span class="icon-5"></span><span>Lifestyle</span></a></li>
+                    <li id="fashion"><a><span class="icon-8"></span><span>Fashion</span></a></li>
+                    <li id="sports"><a><span class="icon-7"></span><span>sports</span></a></li>
+                    <li id="weather"><a><span class="icon-6"></span><span>weather</span></a></li>
                 </ul>
             </div>
             <div class="grid_9">
                 <div class="slider">
                     <div class="camera_wrap camera_azure_skin" id="camera_wrap_1">
-                        @foreach (var item in homeCarousel)
+                        @foreach (var item in shows)
                         {
                             <div data-src="@item.ShowImageUrl">
-                                <div class="camera_caption fadeIn">
-                                    <div class="slider-text">
-                                        <div class="s-test-1"><span class="color-1">@item.ShowHeading</span></div>
-                                        <div><a href="" class="h-underline s-text-2">@item.ShowDesc </a></div>
-                                    </div>
-                                    <div class="time">@item.ShowTiming</div>
-                                </div>
+                                @*<div class="camera_caption fadeIn">
+                                        <div class="slider-text">
+                                            <div class="s-test-1"><span class="color-1">@item.ShowHeading</span></div>
+                                            <div><a href="" class="h-underline s-text-2">@item.ShowDesc </a></div>
+                                        </div>
+                                        <div class="time">@item.ShowTiming</div>
+                                    </div>*@
                             </div>
                         }
                     </div>
@@ -52,7 +222,7 @@
     <div class="bg-1">
         <div class="container_12">
             <div class="row">
-                    <div class="grid_3">
+                @*<div class="grid_3">
                     <h2>Watch tonight: </h2>
                     <div class="list_carousel responsive">
                         <ul id="foo" class="clearfix">
@@ -66,7 +236,7 @@
                                 }
                             </li>
                             <li>
-                                @foreach (var item in watchTonight.OrderBy(x=>x.Id).Skip(4).Take(4))
+                                @foreach (var item in watchTonight.OrderBy(x => x.Id).Skip(4).Take(4))
                                 {
                                     <a href="#" class="clearfix">
                                         <span class="time-2">@item.ShowTiming</span>
@@ -79,66 +249,11 @@
                             <a id="prev1" class="prev" href="#"></a><a id="next1" class="next" href="#"></a>
                         </div>
                     </div>
-                </div>
-                <div class="grid_9">
+                </div>*@
+                <div class="grid_12">
                     <h2>Latest videos:</h2>
                     <div class="list_carousel responsive grid_inside">
                         <ul id="foo1" class="clearfix">
-                            <li>
-                                @foreach (var item in latestVideo.Take(2))
-                                {
-                                    <div class="box-1 clearfix">
-                                        <a class="various iframe" href="@item.VideoUrl">
-                                        <img src="@item.ThumbnailImage" alt=""></a>
-                                        <div>
-                                            <a>@item.VideoDescription</a>
-                                            <div class="color-2">@item.ReleaseData</div>
-                                        </div>
-                                    </div>
-                                }
-                            </li>
-                            <li>
-                                @foreach (var item in latestVideo.OrderBy(x=>x.Id).Skip(2).Take(2))
-                                {
-                                    <div class="box-1 clearfix">
-                                        <a class="various iframe" href="@item.VideoUrl">
-                                            <img src="@item.ThumbnailImage" alt="">
-                                        </a>
-                                        <div>
-                                            <a>@item.VideoDescription</a>
-                                            <div class="color-2">@item.ReleaseData</div>
-                                        </div>
-                                    </div>
-                                }
-                            </li>
-                            <li>
-                                @foreach (var item in latestVideo.OrderBy(x => x.Id).Skip(4).Take(2))
-                                {
-                                    <div class="box-1 clearfix">
-                                        <a class="various iframe" href="@item.VideoUrl">
-                                            <img src="@item.ThumbnailImage" alt="">
-                                        </a>
-                                        <div>
-                                            <a>@item.VideoDescription</a>
-                                            <div class="color-2">@item.ReleaseData</div>
-                                        </div>
-                                    </div>
-                                }
-                            </li>
-                            <li>
-                                @foreach (var item in latestVideo.OrderBy(x => x.Id).Skip(6).Take(2))
-                                {
-                                    <div class="box-1 clearfix">
-                                        <a class="various iframe" href="@item.VideoUrl">
-                                            <img src="@item.ThumbnailImage" alt="">
-                                        </a>
-                                        <div>
-                                            <a>@item.VideoDescription</a>
-                                            <div class="color-2">@item.ReleaseData</div>
-                                        </div>
-                                    </div>
-                                }
-                            </li>
                         </ul>
                         <div class="arrows clearfix">
                             <a id="prev2" class="prev" href="#"></a><a id="next2" class="next" href="#"></a>

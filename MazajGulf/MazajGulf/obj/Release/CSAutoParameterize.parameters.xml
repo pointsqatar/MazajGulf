@@ -1,2 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<parameters />
+<parameters>
+  <parameter name="MazajGulfEntities-Web.config Connection String" description="MazajGulfEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/DataAccessLayer.MazajGulfModel.csdl|res://*/DataAccessLayer.MazajGulfModel.ssdl|res://*/DataAccessLayer.MazajGulfModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=184.168.47.19;initial catalog=mazajgulf_db;persist security info=True;user id=mazajgulf;password=Admin2016;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\Projects\\MazajGulf\\MazajGulf\\MazajGulf\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='MazajGulfEntities']/@connectionString" />
+  </parameter>
+</parameters>

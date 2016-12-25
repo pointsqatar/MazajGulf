@@ -4,4 +4,7 @@
     <parameterEntry kind="ProviderPath" scope="IisApp" match="^D:\\Projects\\MazajGulf\\MazajGulf\\MazajGulf\\obj\\Release\\Package\\PackageTmp$" />
     <parameterEntry kind="ProviderPath" scope="setAcl" match="^D:\\Projects\\MazajGulf\\MazajGulf\\MazajGulf\\obj\\Release\\Package\\PackageTmp$" />
   </parameter>
+  <parameter name="MazajGulfEntities-Web.config Connection String" description="" value="metadata=res://*/DataAccessLayer.MazajGulfModel.csdl|res://*/DataAccessLayer.MazajGulfModel.ssdl|res://*/DataAccessLayer.MazajGulfModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=184.168.47.19;initial catalog=mazajgulf_db;persist security info=True;user id=mazajgulf;password=Admin2016;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="D:\\Projects\\MazajGulf\\MazajGulf\\MazajGulf\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='MazajGulfEntities']/@connectionString" />
+  </parameter>
 </parameters>

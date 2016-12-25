@@ -25,8 +25,15 @@ namespace MazajGulf.DataAccessLayer
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<HomeCarousel> HomeCarousels { get; set; }
-        public virtual DbSet<WatchTonight> WatchTonights { get; set; }
         public virtual DbSet<LatestVideo> LatestVideos { get; set; }
+        public virtual DbSet<News> News { get; set; }
+        public virtual DbSet<Show> Shows { get; set; }
+        public virtual DbSet<WatchTonight> WatchTonights { get; set; }
+        public virtual DbSet<Fashion> Fashions { get; set; }
+        public virtual DbSet<HappenToday> HappenTodays { get; set; }
+        public virtual DbSet<Horoscope> Horoscopes { get; set; }
+        public virtual DbSet<LifeStyle> LifeStyles { get; set; }
+        public virtual DbSet<Sport> Sports { get; set; }
+        public virtual DbSet<Weather> Weathers { get; set; }
     }
 }

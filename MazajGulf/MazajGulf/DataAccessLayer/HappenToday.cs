@@ -12,7 +12,7 @@ namespace MazajGulf.DataAccessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class HomeCarousel
+    public partial class HappenToday
     {
         public int Id { get; set; }
         public string ShowHeading { get; set; }
