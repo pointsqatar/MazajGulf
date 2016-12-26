@@ -1,6 +1,8 @@
-﻿
+﻿@using MazajGulf.DataAccessLayer
 @{
     Layout = null;
+    MazajGulfEntities dbContext = new MazajGulfEntities();
+    var result = dbContext.ArabicNews.Select(x => x);
 }
 
 <!DOCTYPE html>
@@ -18,7 +20,7 @@
     <link rel="stylesheet" href="~/css/jquery.fancybox.css">
     <link rel="stylesheet" href="~/css/style.css">
     <link rel="stylesheet" href="~/css/contacts.css">
-
+    <link href="~/css/jplayer.blue.monday.css" rel="stylesheet" />
 
     <script src="~/js/jquery.js"></script>
     <script src="~/js/jquery-migrate-1.1.1.js"></script>
@@ -38,9 +40,149 @@
     <script src="~/js/jquery.ui.totop.js"></script>
     <script src="~/js/jquery.fancybox.pack.js"></script>
     <script src="~/js/TMForm.js"></script>
+    <script src="~/js/jquery.jplayer.js"></script>
+    <script src="~/js/jplayer.playlist.js"></script>
 
     <script>
-        $(window).load(function() {
+        $(document).ready(function () {
+
+            var time = new Date().getHours();
+            var playlist;
+
+            if (time >= 1 && time < 4) {
+                playlist = [
+                {
+                    mp3: "../Audio/4am-7am/012.mp3",
+                },
+                {
+                    mp3: "../Audio/4am-7am/017.mp3",
+                },
+                {
+                    mp3: "../Audio/4am-7am/012.mp3",
+                },
+                {
+                    mp3: "../Audio/4am-7am/012.mp3",
+                },
+                {
+                    mp3: "../Audio/4am-7am/012.mp3",
+                },
+                {
+                    mp3: "../Audio/4am-7am/012.mp3",
+                },
+                ];
+            }
+            else if (time >= 4 && time < 7) {
+                playlist = [
+               {
+                   mp3: "../Audio/4am-7am/012.mp3",
+               },
+               {
+                   mp3: "../Audio/4am-7am/017.mp3",
+               },
+               {
+                   mp3: "../Audio/4am-7am/018.mp3",
+               },
+               {
+                   mp3: "../Audio/4am-7am/019.mp3",
+               },
+               {
+                   mp3: "../Audio/4am-7am/020.mp3",
+               },
+               {
+                   mp3: "../Audio/4am-7am/036.mp3",
+               },
+               {
+                   mp3: "../Audio/4am-7am/044.mp3",
+               },
+                ];
+            }
+            else if (time >= 7 && time < 12)
+            {
+                playlist = [
+                                {
+                                    mp3: "../Audio/4am-7am/012.mp3",
+                                },
+                                {
+                                    mp3: "../Audio/4am-7am/017.mp3",
+                                },
+                                {
+                                    mp3: "../Audio/4am-7am/012.mp3",
+                                },
+                                {
+                                    mp3: "../Audio/4am-7am/012.mp3",
+                                },
+                                {
+                                    mp3: "../Audio/4am-7am/012.mp3",
+                                },
+                                {
+                                    mp3: "../Audio/4am-7am/012.mp3",
+                                },
+                ];
+            }
+            else if (time >= 12 && time < 21)
+            {
+                playlist = [
+                                {
+                                    mp3: "../Audio/4am-7am/012.mp3",
+                                },
+                                {
+                                    mp3: "../Audio/4am-7am/017.mp3",
+                                },
+                                {
+                                    mp3: "../Audio/4am-7am/012.mp3",
+                                },
+                                {
+                                    mp3: "../Audio/4am-7am/012.mp3",
+                                },
+                                {
+                                    mp3: "../Audio/4am-7am/012.mp3",
+                                },
+                                {
+                                    mp3: "../Audio/4am-7am/012.mp3",
+                                },
+                ];
+            }
+            else if (time >= 21) {
+                playlist = [
+                               {
+                                   mp3: "../Audio/4am-7am/012.mp3",
+                               },
+                               {
+                                   mp3: "../Audio/4am-7am/017.mp3",
+                               },
+                               {
+                                   mp3: "../Audio/4am-7am/018.mp3",
+                               },
+                               {
+                                   mp3: "../Audio/4am-7am/019.mp3",
+                               },
+                               {
+                                   mp3: "../Audio/4am-7am/020.mp3",
+                               },
+                               {
+                                   mp3: "../Audio/4am-7am/036.mp3",
+                               },
+                               {
+                                   mp3: "../Audio/4am-7am/044.mp3",
+                               },
+                ];
+            }
+
+
+            new jPlayerPlaylist({
+                jPlayer: "#jquery_jplayer_1",
+                cssSelectorAncestor: "#jp_container_1"
+            }, playlist, {
+                swfPath: "../../dist/jplayer",
+                supplied: "oga, mp3",
+                wmode: "window",
+                useStateClassSkin: true,
+                autoBlur: false,
+                smoothPlayBar: true,
+                keyEnabled: true
+            });
+        });
+        $(window).load(function () {
             jQuery('#camera_wrap_1').camera({
                 height: '71.71%',
                 playPause: false,
@@ -48,7 +190,7 @@
                 transPeriod: 1000,
                 fx: 'simpleFade',
                 loader: 'none',
-                minHeight:'150px',
+                minHeight: '150px',
                 navigation: true,
                 pagination: false,
             });
@@ -95,7 +237,7 @@
                 }
             });
 
-            $(function() {$("a.various").fancybox();});
+            $(function () { $("a.various").fancybox(); });
 
         });
     </script>
@@ -145,23 +287,72 @@
                         </nav>
                         <div class="inside clearfix">
                             <ul class="list-2">
-                                <li><a href="@Url.Action("index","home")">login</a></li>
+                                <li><h4>Frequency : 12399 V</h4></li></br>
+                                <li><h4>27500  Nile Sat</h4></li>
                             </ul>
-                            <form id="search1" class="search" action="search.php" method="GET">
+                            <form id="search1" class="search">
                                 <div>
-                                    @*<input type="text" name="s" value="Enter keyword" onClick="if(this.value=='Enter keyword'){this.value=''}" onBlur="if(this.value==''){this.value='Enter keyword'}">*@
-                                    @*<a onClick="document.getElementById('search1').submit()" class="button1">search</a>*@
-                                    <h4>Frequency : 12399 V</h4>
-                                    <h4>27500  Nile Sat</h4>
+                                    <div id="jquery_jplayer_1" class="jp-jplayer"></div>
+                                    <div id="jp_container_1" class="jp-audio" role="application" aria-label="media player">
+                                        <div class="jp-type-playlist">
+                                            <div class="jp-gui jp-interface">
+                                                <div class="jp-controls">
+                                                    <button class="jp-previous" role="button" tabindex="0">previous</button>
+                                                    <button class="jp-play" role="button" tabindex="0">play</button>
+                                                    <button class="jp-next" role="button" tabindex="0">next</button>
+                                                    <button class="jp-stop" role="button" tabindex="0">stop</button>
+                                                </div>
+                                                <div class="jp-progress">
+                                                    <div class="jp-seek-bar">
+                                                        <div class="jp-play-bar"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="jp-volume-controls">
+                                                    <button class="jp-mute" role="button" tabindex="0">mute</button>
+                                                    <button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+                                                    <div class="jp-volume-bar">
+                                                        <div class="jp-volume-bar-value"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="jp-time-holder">
+                                                    <div class="jp-current-time" role="timer" aria-label="time">&nbsp;</div>
+                                                    <div class="jp-duration" role="timer" aria-label="duration">&nbsp;</div>
+                                                </div>
+                                                <div class="jp-toggles">
+                                                    <button class="jp-repeat" role="button" tabindex="0">repeat</button>
+                                                    <button class="jp-shuffle" role="button" tabindex="0">shuffle</button>
+                                                </div>
+                                            </div>
+                                            <div class="jp-playlist" style="display:none">
+                                                <ul>
+                                                    <li>&nbsp;</li>
+                                                </ul>
+                                            </div>
+                                            <div class="jp-no-solution">
+                                                <span>Update Required</span>
+                                                To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </header>
+    <section id="marquee_arabic">
+        <marquee hspace="10%" direction="right" style="font-size:20px; padding-top:6px">
+            @{ string news = "# ";}
+            @foreach (var item in result)
+            {
+                news += item.ArabicNews + " # ";
+            }
+            @news
+        </marquee>
+    </section>
 
     <!--=======content================================-->
     @RenderBody()
@@ -207,7 +398,7 @@
                 <div class="grid_4 fleft">
                     <div>
                         <div class="b-logo">
-                            <a href="index.html" class="f-logo"><img src="~/images/logo.png" alt=""></a>
+                            <a href="@Url.Action("index","home")" class="f-logo"><img src="~/images/logo.png" alt=""></a>
                             <div class="copyright">&copy; 2016 <br> <a href="index-5.html" class="h-underline">Privacy Policy</a></div>
                         </div>
                     </div>

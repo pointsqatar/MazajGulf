@@ -35,5 +35,6 @@ namespace MazajGulf.DataAccessLayer
         public virtual DbSet<LifeStyle> LifeStyles { get; set; }
         public virtual DbSet<Sport> Sports { get; set; }
         public virtual DbSet<Weather> Weathers { get; set; }
+        public virtual DbSet<ArabicNew> ArabicNews { get; set; }
     }
 }

@@ -5,6 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="MazajGulfDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ArabicNews">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ArabicNews" Type="nvarchar(max)" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="Fashion">
           <Key>
             <PropertyRef Name="Id" />
@@ -114,6 +122,7 @@
           <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
         <EntityContainer Name="MazajGulfDBModelStoreContainer">
+          <EntitySet Name="ArabicNews" EntityType="Self.ArabicNews" Schema="mazajgulf" store:Type="Tables" />
           <EntitySet Name="Fashion" EntityType="Self.Fashion" Schema="mazajgulf" store:Type="Tables" />
           <EntitySet Name="HappenToday" EntityType="Self.HappenToday" Schema="mazajgulf" store:Type="Tables" />
           <EntitySet Name="Horoscope" EntityType="Self.Horoscope" Schema="mazajgulf" store:Type="Tables" />
@@ -140,6 +149,7 @@
           <EntitySet Name="LifeStyles" EntityType="MazajGulfDBModel.LifeStyle" />
           <EntitySet Name="Sports" EntityType="MazajGulfDBModel.Sport" />
           <EntitySet Name="Weathers" EntityType="MazajGulfDBModel.Weather" />
+          <EntitySet Name="ArabicNews" EntityType="MazajGulfDBModel.ArabicNew" />
         </EntityContainer>
         <EntityType Name="LatestVideo">
           <Key>
@@ -247,6 +257,14 @@
           <Property Name="ShowDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ShowTiming" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="ShowImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ArabicNew">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ArabicNews" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
@@ -369,6 +387,15 @@
                 <ScalarProperty Name="ShowTiming" ColumnName="ShowTiming" />
                 <ScalarProperty Name="ShowDesc" ColumnName="ShowDesc" />
                 <ScalarProperty Name="ShowHeading" ColumnName="ShowHeading" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ArabicNews">
+            <EntityTypeMapping TypeName="MazajGulfDBModel.ArabicNew">
+              <MappingFragment StoreEntitySet="ArabicNews">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ArabicNews" ColumnName="ArabicNews" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -235,8 +235,8 @@ a.color-4:hover {
 
 .list-2 {
     float: left;
-    margin-top: 28px;
-    margin-left: 42px;
+    margin-top: 20px;
+    margin-left: 0px;
 }
 
     .list-2 li {
@@ -510,7 +510,13 @@ p {
 /************Header************/
 header {
     background: #041a25;
-    padding-bottom: 20px;
+    /*padding-bottom: 20px;*/
+}
+
+#marquee_arabic {
+    background-color: #041a25;
+    height: 29px;
+    color: wheat;
 }
 
 h1 a {
@@ -523,7 +529,7 @@ h1 a {
 
 form#search1 {
     float: right;
-    margin-top: 18px;
+    margin-top: 8px;
     margin-right: 16px;
 }
 
